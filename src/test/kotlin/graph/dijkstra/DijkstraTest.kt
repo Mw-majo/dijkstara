@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 internal class DijkstraTest() {
     @Test
     internal fun dijkstra_solveNormalCondition() {
-        val ans = Dijkstra.solve()
+        val ans = Dijkstra().ansList
         val expectedAnswer = listOf<List<Int>>(
             listOf(0),
             listOf(0, 1),
