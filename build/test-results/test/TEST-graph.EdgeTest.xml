@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="graph.EdgeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-31T07:27:27" hostname="RITZPC" time="0.0">
+  <properties/>
+  <testcase name="testGetReverseEdge$Dijkstra()" classname="graph.EdgeTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

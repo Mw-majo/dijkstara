@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="graph.GraphTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-05-31T07:27:27" hostname="RITZPC" time="0.028">
+  <properties/>
+  <testcase name="testAddEdgeOnlyWithCheckingEdges$Dijkstra()" classname="graph.GraphTest" time="0.023"/>
+  <testcase name="testAddEdgeOnlyWithCheckingNodes$Dijkstra()" classname="graph.GraphTest" time="0.0"/>
+  <testcase name="testAddEdgeWithCheckingEdges$Dijkstra()" classname="graph.GraphTest" time="0.0"/>
+  <testcase name="testAddEdgeWithCheckingNodes$Dijkstra()" classname="graph.GraphTest" time="0.002"/>
+  <testcase name="testAddSameEdgeOnlyWithCheckingEdges$Dijkstra()" classname="graph.GraphTest" time="0.001"/>
+  <testcase name="testInit$Dijkstra()" classname="graph.GraphTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
