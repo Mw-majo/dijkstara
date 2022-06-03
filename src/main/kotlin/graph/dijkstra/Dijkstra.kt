@@ -17,8 +17,9 @@ class Dijkstra {
         private const val startNodeId = 0
         // private const val goalNodeId = 1
 
-        private val NAMES = listOf("home", "A", "school", "C", "B", "shop")
+        // private val NAMES = listOf("home", "A", "school", "C", "B", "shop")
         private val id = 0 until NODE_VALUE
+
         // private val nodeName = id.associateWith { NAMES[it] }
         private val nodeEdges = id.associateWith { graphData[it] }
         private val nodeCost = id.associateWith { if (it == startNodeId) 0 else Int.MAX_VALUE }.toMutableMap()
