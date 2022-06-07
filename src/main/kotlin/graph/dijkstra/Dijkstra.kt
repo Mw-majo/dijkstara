@@ -4,7 +4,8 @@ class Dijkstra() {
 
     val ansList: List<List<Int>>
 
-    private val input = listOf(
+    // この2変数を標準入力で受け取る
+    private val edges = listOf(
         listOf(0, 1, 6),
         listOf(0, 5, 3),
         listOf(1, 2, 3),
@@ -14,9 +15,10 @@ class Dijkstra() {
         listOf(3, 4, 1),
         listOf(4, 5, 2)
     )
-
     private val nodeNumber = 6
-    private val graphDataGenerated = Graph(nodeNumber, input)
+    //
+
+    private val graphDataGenerated = Graph(nodeNumber, edges)
     private val graphData = graphDataGenerated.costList
     //private val NODE_VALUE = graphData.size
 
