@@ -2,7 +2,7 @@ package graph.dijkstra
 
 class Dijkstra() {
 
-    val ansList: List<List<Int>>
+    val ansList: List<List<List<Int>>>
 
     // この2変数を標準入力で受け取る
     private val edges = listOf(
@@ -18,41 +18,43 @@ class Dijkstra() {
     private val nodeNumber = 6
     //
 
-    private val graphDataGenerated = Graph(nodeNumber, edges)
-    private val graphData = graphDataGenerated.costList
-    //private val NODE_VALUE = graphData.size
-
-    private val startNodeId = 0
-    // private const val goalNodeId = 1
-
-    // private val NAMES = listOf("home", "A", "school", "C", "B", "shop")
+    private val graphData = Graph(nodeNumber, edges).costList
     private val id = 0 until nodeNumber
-
-    // private val nodeName = id.associateWith { NAMES[it] }
     private val nodeEdges = id.associateWith { graphData[it] }
-    private val nodeCost = id.associateWith { if (it == startNodeId) 0 else Int.MAX_VALUE }.toMutableMap()
-    private val nodeIsVisited = id.associateWith { false }.toMutableMap()
-    private val nodeParent: MutableMap<Int, Int?> = id.associateWith { null }.toMutableMap()
-
 
     init {
-        ansList = solve()
+        ansList = solveAllCondition()
     }
 
-    private fun solve(): List<List<Int>> {
-        while (isSolve()) {
-            val closestNode = getMinCostNode()
+    private fun solveAllCondition(): List<List<List<Int>>> {
+        val result = mutableListOf<List<List<Int>>>()
+        for (i in 0 until nodeNumber) {
+            val tempNode = solve(i)
+            result.add(tempNode)
+        }
+
+        return result.toList()
+    }
+
+    private fun solve(startNodeId: Int): List<List<Int>> {
+        val nodeCostList = id.associateWith { if (it == startNodeId) 0 else Int.MAX_VALUE }.toMutableMap()
+        val nodeIsVisited = id.associateWith { false }.toMutableMap()
+        val nodeParent: MutableMap<Int, Int?> = id.associateWith { null }.toMutableMap()
+
+
+        while (nodeIsVisited.any { !it.value }) {
+            val closestNode = getMinCostNode(nodeCostList, nodeIsVisited)
             val closestNodeCost =
-                nodeCost[closestNode] ?: throw java.lang.NullPointerException("closest nodeCost Nullpo desuwa")
+                nodeCostList[closestNode] ?: throw java.lang.NullPointerException("closest nodeCost Nullpo desuwa")
             val checkingEdges =
                 nodeEdges[closestNode] ?: throw java.lang.NullPointerException("nodeEdge Nullpo desuwa")
 
             checkingEdges.forEachIndexed { idx, cost ->
                 //println("$cost $idx")
                 if (cost > 0) {
-                    val targetCost = nodeCost[idx] ?: throw java.lang.NullPointerException("nodeCost Nullpo desuwa")
+                    val targetCost = nodeCostList[idx] ?: throw java.lang.NullPointerException("nodeCost Nullpo desuwa")
                     if (targetCost > cost + closestNodeCost) {
-                        nodeCost[idx] = cost + closestNodeCost
+                        nodeCostList[idx] = cost + closestNodeCost
                         nodeParent[idx] = closestNode
                     }
                 }
@@ -73,14 +75,14 @@ class Dijkstra() {
             parentsList.add(list.toList().reversed())
         }
         return parentsList.toList()
+
     }
 
-    private fun isSolve() = nodeIsVisited.any { !it.value }
-    private fun getMinCostNode(): Int { // 最小コストノードのID
+    private fun getMinCostNode(nodeCostList: MutableMap<Int, Int>, nodeIsVisited: MutableMap<Int, Boolean>): Int { // 最小コストノードのID
         val unvisitedNode = nodeIsVisited.filter { !it.value }
         val minCostNode = unvisitedNode
             .map { it.key }
-            .associateWith { nodeCost[it] }
+            .associateWith { nodeCostList[it] }
             .minByOrNull { it.value ?: Int.MAX_VALUE }
             ?.key
 
