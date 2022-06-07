@@ -1,25 +1,30 @@
 package graph.dijkstra
 
-class Dijkstra {
+class Dijkstra() {
 
     val ansList: List<List<Int>>
 
-    //private const val NODE_VALUE = 6
-    private val graphData = listOf(
-        listOf(0, 6, 0, 0, 0, 3),
-        listOf(6, 0, 3, 0, 0, 0),
-        listOf(0, 3, 0, 1, 3, 5),
-        listOf(0, 0, 1, 0, 1, 0),
-        listOf(0, 0, 3, 1, 0, 2),
-        listOf(3, 0, 5, 0, 2, 0)
+    private val input = listOf(
+        listOf(0, 1, 6),
+        listOf(0, 5, 3),
+        listOf(1, 2, 3),
+        listOf(2, 3, 1),
+        listOf(2, 4, 3),
+        listOf(2, 5, 5),
+        listOf(3, 4, 1),
+        listOf(4, 5, 2)
     )
-    private val NODE_VALUE = graphData.size
+
+    private val nodeNumber = 6
+    private val graphDataGenerated = Graph(nodeNumber, input)
+    private val graphData = graphDataGenerated.costList
+    //private val NODE_VALUE = graphData.size
 
     private val startNodeId = 0
     // private const val goalNodeId = 1
 
     // private val NAMES = listOf("home", "A", "school", "C", "B", "shop")
-    private val id = 0 until NODE_VALUE
+    private val id = 0 until nodeNumber
 
     // private val nodeName = id.associateWith { NAMES[it] }
     private val nodeEdges = id.associateWith { graphData[it] }
@@ -28,7 +33,7 @@ class Dijkstra {
     private val nodeParent: MutableMap<Int, Int?> = id.associateWith { null }.toMutableMap()
 
 
-    constructor() {
+    init {
         ansList = solve()
     }
 
@@ -54,7 +59,7 @@ class Dijkstra {
         }
 
         val parentsList = mutableListOf<List<Int>>()
-        for (i in 0 until NODE_VALUE) {
+        for (i in 0 until nodeNumber) {
             var parent: Int? = i
             val list = mutableListOf<Int>(parent!!)
             while (true) {
