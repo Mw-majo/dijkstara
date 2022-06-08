@@ -2,7 +2,7 @@ package graph.dijkstra
 
 class Dijkstra() {
 
-    val ansList: List<List<List<Int>>>
+    private val ansList: List<List<List<Int>>>
     private val edges: List<List<Int>>
     private val nodeNumber: Int
     private val id: IntRange
@@ -29,6 +29,18 @@ class Dijkstra() {
         this.nodeEdges = id.associateWith { graphData[it] }
         ansList = solveAllCondition()
     }
+
+    // スタートとゴールのノードを受け取り、最短経路を返す関数
+    fun getShortestPath(startNode: Int, goalNode: Int): List<Int> {
+        return ansList[startNode][goalNode]
+    }
+
+    // スタートノードを受け取り、そこから各ノードへの最短経路を返す関数
+    fun getShortestPath(startNode: Int): List<List<Int>> {
+        return ansList[startNode]
+    }
+
+
 
     private fun solveAllCondition(): List<List<List<Int>>> {
 
