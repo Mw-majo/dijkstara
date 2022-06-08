@@ -48,18 +48,7 @@ internal class DijkstraTest() {
         input.inputln("3 4 1")
         input.inputln("4 5 2")
 
-        val (nodeNumber, edgeNumber) = readLine()!!
-            .split(" ")
-            .slice(0..1)
-            .map { it.toInt() }
-        val edges = List(edgeNumber) {
-            readLine()!!
-                .split(" ")
-                .slice(0..2)
-                .map{ it.toInt() }
-        }
-
-        val ans = Dijkstra(nodeNumber, edges).ansList[0]
+        val ans = Dijkstra().ansList[0]
         val expectedAnswer = listOf<List<Int>>(
             listOf(0),
             listOf(0, 1),

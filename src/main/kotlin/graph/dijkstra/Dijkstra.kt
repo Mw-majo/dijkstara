@@ -1,19 +1,6 @@
 package graph.dijkstra
 
-class Dijkstra(nodeNumber: Int, edges: List<List<Int>>) {
-
-    // input
-//    private val edges = listOf(
-//        listOf(0, 1, 6),
-//        listOf(0, 5, 3),
-//        listOf(1, 2, 3),
-//        listOf(2, 3, 1),
-//        listOf(2, 4, 3),
-//        listOf(2, 5, 5),
-//        listOf(3, 4, 1),
-//        listOf(4, 5, 2)
-//    )
-    //
+class Dijkstra() {
 
     val ansList: List<List<List<Int>>>
     private val edges: List<List<Int>>
@@ -23,8 +10,20 @@ class Dijkstra(nodeNumber: Int, edges: List<List<Int>>) {
     private val nodeEdges: Map<Int, Array<Int>>
 
     init {
-        this.edges = edges
+        val (nodeNumber, edgeNumber) = readLine()!!
+            .split(" ")
+            .slice(0..1)
+            .map { it.toInt() }
         this.nodeNumber = nodeNumber
+
+        val edges = List(edgeNumber) {
+            readLine()!!
+                .split(" ")
+                .slice(0..2)
+                .map{ it.toInt() }
+        }
+        this.edges = edges
+
         this.id = 0 until this.nodeNumber
         this.graphData = Graph(this.nodeNumber, edges).costList
         this.nodeEdges = id.associateWith { graphData[it] }
