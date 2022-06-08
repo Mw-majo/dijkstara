@@ -3,6 +3,7 @@ package graph.dijkstra
 class Dijkstra() {
 
     private val ansList: List<List<List<Int>>>
+    private val shortestPathCosts = mutableListOf<Map<Int, Int>>()
     private val edges: List<List<Int>>
     private val nodeNumber: Int
     private val id: IntRange
@@ -40,7 +41,10 @@ class Dijkstra() {
         return ansList[startNode]
     }
 
-
+    // 最短経路のコストを返す
+    fun getShortestPathCost(startNode: Int, goalNode: Int): Int {
+        return shortestPathCosts[startNode][goalNode] ?: throw IllegalArgumentException("don't exist node. startNode: $startNode goalNode: $goalNode")
+    }
 
     private fun solveAllCondition(): List<List<List<Int>>> {
 
@@ -89,8 +93,8 @@ class Dijkstra() {
 
             parentsList.add(list.toList().reversed())
         }
+        shortestPathCosts.add(nodeCostList)
         return parentsList.toList()
-
     }
 
     private fun getMinCostNode(nodeCostList: MutableMap<Int, Int>, nodeIsVisited: MutableMap<Int, Boolean>): Int { // 最小コストノードのID
